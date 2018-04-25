@@ -17,8 +17,11 @@
   "dependencies": {
     "dotenv": "^5.0.1",
     "hapi": "^17.3.1",
+    "hapi-swagger": "^9.1.1",
+    "inert": "^5.1.0",
     "joi": "^13.2.0",
-    "mongoose": "^5.0.16"
+    "mongoose": "^5.0.16",
+    "vision": "^5.3.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

@@ -4,31 +4,43 @@ import handler from "./handler";
 export default async function (server) {
   server.route({
     method: 'get',
-    path: '/',
+    path: '/example/',
     handler: handler.list
   });
 
   server.route({
     method: 'get',
-    path: '/{id}',
-    handler: handler.show
+    path: '/example/{id}',
+    handler: handler.show,
+    config: {
+      tags: ['api']
+    }
   });
 
   server.route({
     method: 'post',
-    path: '/',
-    handler: handler.create
+    path: '/example/',
+    handler: handler.create,
+    config: {
+      tags: ['api']
+    }
   });
 
   server.route({
     method: 'patch',
-    path: '/{id}',
-    handler: handler.update
+    path: '/example/{id}',
+    handler: handler.update,
+    config: {
+      tags: ['api']
+    }
   });
 
   server.route({
     method: 'delete',
-    path: '/{id}',
-    handler: handler.delete
+    path: '/example/{id}',
+    handler: handler.delete,
+    config: {
+      tags: ['api']
+    }
   });
 }
