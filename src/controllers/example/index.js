@@ -1,11 +1,21 @@
 // @flow
-import handler from "./handler";
+import Joi from 'joi';
+import handler from './handler';
+import {ExampleSchema} from '../../schema/Example';
 
 export default async function (server) {
   server.route({
     method: 'get',
     path: '/example/',
-    handler: handler.list
+    handler: handler.list,
+    config: {
+      tags: ['api'],
+      response: {
+        status: {
+          200: Joi.array().items(ExampleSchema),
+        }
+      }
+    }
   });
 
   server.route({
@@ -13,7 +23,17 @@ export default async function (server) {
     path: '/example/{id}',
     handler: handler.show,
     config: {
-      tags: ['api']
+      tags: ['api'],
+      validate: {
+        params: {
+          id: Joi.string().required()
+        }
+      },
+      response: {
+        status: {
+          200: ExampleSchema,
+        }
+      }
     }
   });
 
@@ -22,7 +42,15 @@ export default async function (server) {
     path: '/example/',
     handler: handler.create,
     config: {
-      tags: ['api']
+      tags: ['api'],
+      validate: {
+        payload: ExampleSchema,
+      },
+      response: {
+        status: {
+          200: ExampleSchema,
+        }
+      }
     }
   });
 
@@ -31,7 +59,18 @@ export default async function (server) {
     path: '/example/{id}',
     handler: handler.update,
     config: {
-      tags: ['api']
+      tags: ['api'],
+      validate: {
+        params: {
+          id: Joi.string().required()
+        },
+        payload: ExampleSchema,
+      },
+      response: {
+        status: {
+          200: ExampleSchema,
+        }
+      }
     }
   });
 
@@ -40,7 +79,12 @@ export default async function (server) {
     path: '/example/{id}',
     handler: handler.delete,
     config: {
-      tags: ['api']
+      tags: ['api'],
+      validate: {
+        params: {
+          id: Joi.string().required()
+        },
+      },
     }
   });
 }
