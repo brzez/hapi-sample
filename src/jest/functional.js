@@ -1,5 +1,6 @@
 // @flow
-import boot from '../src/boot';
+import _request from 'supertest';
+import boot from '../boot';
 
 beforeEach(async (done) => {
   global.app = await boot();
@@ -10,3 +11,8 @@ afterEach(async (done) => {
   await global.app.stop();
   done();
 });
+
+
+export function request () {
+  return _request(global.app.listener);
+}
