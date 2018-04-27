@@ -2,10 +2,10 @@
 import glob from '../util/glob';
 
 export default async function registerControllers (server) {
-  const controllers = await glob(`${__dirname}/../plugins/{**/index.js,*.js}`);
+  const plugins = await glob(`${__dirname}/../plugins/{**/index.js,*.js}`);
 
-  for (const controller of controllers) {
-    const required = require(controller).default;
+  for (const plugin of plugins) {
+    const required = require(plugin).default;
     await required(server)
   }
 }

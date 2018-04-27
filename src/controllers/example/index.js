@@ -1,7 +1,7 @@
 // @flow
 import Joi from 'joi';
 import handler from './handler';
-import {ExampleSchema} from '../../schema/Example';
+import {BaseExampleSchema, ExampleSchema} from '../../schema/Example';
 
 export default async function (server) {
   server.route({
@@ -11,6 +11,10 @@ export default async function (server) {
     config: {
       tags: ['api'],
       response: {
+        modify: true,
+        options: {
+          stripUnknown: true,
+        },
         status: {
           200: Joi.array().items(ExampleSchema),
         }
@@ -30,6 +34,10 @@ export default async function (server) {
         }
       },
       response: {
+        modify: true,
+        options: {
+          stripUnknown: true,
+        },
         status: {
           200: ExampleSchema,
         }
@@ -44,9 +52,13 @@ export default async function (server) {
     config: {
       tags: ['api'],
       validate: {
-        payload: ExampleSchema,
+        payload: BaseExampleSchema,
       },
       response: {
+        modify: true,
+        options: {
+          stripUnknown: true,
+        },
         status: {
           200: ExampleSchema,
         }
@@ -64,7 +76,7 @@ export default async function (server) {
         params: {
           id: Joi.string().required()
         },
-        payload: ExampleSchema,
+        payload: BaseExampleSchema,
       },
       response: {
         status: {
