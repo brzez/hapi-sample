@@ -12,8 +12,20 @@ export default {
     return await new Example(request.payload).save();
   },
   update: async (request, h) => {
-    const entity = await Example.findById(request.params.id);
-    return await Example.findById(request.params.id);
+    const {id} = request.params;
+    const entity = await Example.findById(id);
+    if (!entity) {
+      return h.response().code(404);
+    }
+    return await Example.findByIdAndUpdate(id, request.payload, {new: true});
   },
-  delete: (request, h) => 'delete',
+  delete: async (request, h) => {
+    const {id} = request.params;
+    const entity = await Example.findById(id);
+    if (!entity) {
+      return h.response().code(404);
+    }
+    await Example.findByIdAndRemove(id);
+    return h.response().code(204);
+  },
 };

@@ -79,6 +79,10 @@ export default async function (server) {
         payload: BaseExampleSchema,
       },
       response: {
+        modify: true,
+        options: {
+          stripUnknown: true,
+        },
         status: {
           200: ExampleSchema,
         }
