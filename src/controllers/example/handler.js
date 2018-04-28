@@ -2,16 +2,16 @@
 import {Example} from "../../models/Example";
 
 export default {
-  async show(request, h) {
+  async show(request: any, h: any) {
     return await Example.findById(request.params.id);
   },
-  async list(request, h) {
+  async list(request: any, h: any) {
     return await Example.find();
   },
-  async create(request, h) {
+  async create(request: any, h: any) {
     return await new Example(request.payload).save();
   },
-  async update(request, h) {
+  async update(request: any, h: any) {
     const {id} = request.params;
     const entity = await Example.findById(id);
     if (!entity) {
@@ -19,8 +19,10 @@ export default {
     }
     return await Example.findByIdAndUpdate(id, request.payload, {new: true});
   },
-  async delete(request, h) {
-    const entity = await Example.findById(request.params.id);
+  async delete(request: any, h: any) {
+    const {id} = request.params;
+
+    const entity = await Example.findById(id);
     if (!entity) {
       return h.response().code(404);
     }

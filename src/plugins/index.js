@@ -1,9 +1,10 @@
 // @flow
 import inert from 'inert';
+import hapi from 'hapi';
 import vision from 'vision';
 import HapiSwagger from 'hapi-swagger';
 
-export default async function plugins (server) {
+export default async function plugins (server: hapi.server) {
   const pkg = require('../../package');
   const swaggerOptions = {
     info: {

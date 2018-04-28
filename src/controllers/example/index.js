@@ -1,9 +1,10 @@
 // @flow
 import Joi from 'joi';
+import hapi from 'hapi'
 import handler from './handler';
 import {BaseExampleSchema, ExampleSchema} from '../../schema/Example';
 
-export default async function (server) {
+export default async function (server: hapi.server) {
   server.route({
     method: 'get',
     path: '/example/',
@@ -16,7 +17,7 @@ export default async function (server) {
           stripUnknown: true,
         },
         status: {
-          200: Joi.array().items(ExampleSchema),
+          [200]: Joi.array().items(ExampleSchema),
         }
       }
     }
@@ -39,7 +40,7 @@ export default async function (server) {
           stripUnknown: true,
         },
         status: {
-          200: ExampleSchema,
+          [200]: ExampleSchema,
         }
       }
     }
@@ -60,7 +61,7 @@ export default async function (server) {
           stripUnknown: true,
         },
         status: {
-          200: ExampleSchema,
+          [200]: ExampleSchema,
         }
       }
     }
@@ -84,7 +85,7 @@ export default async function (server) {
           stripUnknown: true,
         },
         status: {
-          200: ExampleSchema,
+          [200]: ExampleSchema,
         }
       }
     }
